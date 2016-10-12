@@ -9,7 +9,7 @@ tabuleiro = [[0,0,0],
              [0,0,0],
              [0,0,0]]
 ipAdversario = False
-myPort = 5000
+myPort = 5005
 
 @app.route("/setIPByServer/<port>")
 def setIPByServer(port):
