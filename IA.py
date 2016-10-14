@@ -57,7 +57,7 @@ def pegarJogadaDaIa(tabuleiroAtual, espacoEmBranco, pecaDaIA, pecaDoJogador):
 tabuleiro = [[0,0,0],[0,0,0],[0,0,0]]
 
 while True:
-    aux = input().split()
+    aux = raw_input().split()
     x = int(aux[0])
     y = int(aux[1])
 
