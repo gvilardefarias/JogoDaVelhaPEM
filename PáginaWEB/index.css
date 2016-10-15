@@ -1,0 +1,19 @@
+.btn{
+  margin-top: 7px;
+  width: 169px;
+  height: 35px;
+}
+
+.primeiro{
+  margin-bottom: 10px;
+}
+
+.cabecalho{
+  color: white;
+  font-size: 4;
+  position: absolute;
+  top: 0px;
+  height: 30px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+}
