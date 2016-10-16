@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
 
@@ -9,7 +10,20 @@
 
   <title>PEM - Multiplayer Offline</title>
 </head>
-<body>
-  <center><canvas id="myCanvas" width="450" height="450" style="border:1px solid #000000;"></canvas></center>
+<body class="teal deep-purple darken-4">
+  <center><canvas class="z-depth-4" width="450" height="450"></canvas></center>
+
+  <center><a class="waves-effect waves-light btn white modal-trigger z-depth-2 verPlacar" href="#Placar"><span class="black-text">Ver Placar</span></a></center>
+
+  <div id="Placar" class="modal bottom-sheet">
+    <div class="modal-content">
+      <center><h4 id="Ganhador">Placar</h4></center>
+      <h5 class="placar1">1</h5>
+      <h5 class="placar2">2</h5>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
 </body>
 </html>

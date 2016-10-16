@@ -1,0 +1,10 @@
+.verPlacar{
+    margin-top: 5px;
+}
+
+.placar2{
+    position: absolute;
+    margin-top: -50px;
+    right: 0px;
+    color: red;
+}
