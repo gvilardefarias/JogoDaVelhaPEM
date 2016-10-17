@@ -1,3 +1,18 @@
+.container{
+    width: 450px;
+    height: 450px;
+    vertical-align: center;
+}
+
+.s4{
+    height: 140px;
+    text-align: center;
+}
+
+.s4:hover{
+    background-color: rgba(255,255,255,0.3);
+}
+
 .verPlacar{
     margin-top: 5px;
 }
