@@ -13,19 +13,19 @@
 <body class="teal deep-purple darken-4">
   <div class="container z-depth-2">
     <div class="row">
-      <div class="col s4"><h1>x</h1></div>
-      <div class="col s4"><h1>x</h1></div>
-      <div class="col s4"><h1>x</h1></div>
+      <div class="col s4" onclick="addPeca(0,0)" onmouseover="mouseEmCima('1');" onmouseout="atualizarTabuleiro();"><h1 id="1"></h1></div>
+      <div class="col s4" onclick="addPeca(0,1)" onmouseover="mouseEmCima('2');" onmouseout="atualizarTabuleiro();"><h1 id="2"></h1></div>
+      <div class="col s4" onclick="addPeca(0,2)" onmouseover="mouseEmCima('3');" onmouseout="atualizarTabuleiro();"><h1 id="3"></h1></div>
     </div>
     <div class="row">
-      <div class="col s4"><h1></h1></div>
-      <div class="col s4"><h1>x</h1></div>
-      <div class="col s4"><h1>x</h1></div>
+      <div class="col s4" onclick="addPeca(1,0)" onmouseover="mouseEmCima('4');" onmouseout="atualizarTabuleiro();"><h1 id="4"></h1></div>
+      <div class="col s4" onclick="addPeca(1,1)" onmouseover="mouseEmCima('5');" onmouseout="atualizarTabuleiro();"><h1 id="5"></h1></div>
+      <div class="col s4" onclick="addPeca(1,2)" onmouseover="mouseEmCima('6');" onmouseout="atualizarTabuleiro();"><h1 id="6"></h1></div>
     </div>
     <div class="row">
-      <div class="col s4"><h1>x</h1></div>
-      <div class="col s4"><h1>x</h1></div>
-      <div class="col s4"><h1>x</h1></div>
+      <div class="col s4" onclick="addPeca(2,0)" onmouseover="mouseEmCima('7');" onmouseout="atualizarTabuleiro();"><h1 id="7"></h1></div>
+      <div class="col s4" onclick="addPeca(2,1)" onmouseover="mouseEmCima('8');" onmouseout="atualizarTabuleiro();"><h1 id="8"></h1></div>
+      <div class="col s4" onclick="addPeca(2,2)" onmouseover="mouseEmCima('9');" onmouseout="atualizarTabuleiro();"><h1 id="9"></h1></div>
     </div>
   </div>
   <p></p>
@@ -34,8 +34,8 @@
   <div id="Placar" class="modal bottom-sheet">
     <div class="modal-content">
       <center><h4 id="Ganhador">Placar</h4></center>
-      <h5 class="placar1">1</h5>
-      <h5 class="placar2">2</h5>
+      <h5 class="placar1">0</h5>
+      <h5 class="placar2">0</h5>
     </div>
     <div class="modal-footer">
       <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
