@@ -16,7 +16,7 @@ tabuleiro = [['','',''],
 ipAdversario = False
 minhaJogada = 0
 jogadaAdversario = 0
-myPort = 5000
+myPort = 5005
 
 @app.route("/temVencedor", methods = ['POST'])
 def temVencedor():

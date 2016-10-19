@@ -4,7 +4,7 @@ $(document).ready(function(){
 });
 
 
-var pecas = ['X', 'O'], minhaPeca, vez = 0, placar = [0, 0], tabuleiro = new Array(3), ganhador='False', myPort = 5000;
+var pecas = ['X', 'O'], minhaPeca, vez = 0, placar = [0, 0], tabuleiro = new Array(3), ganhador='False', myPort = 5005;
 var dicionario = {1 : [0, 0],
   2 : [0, 1],
   3 : [0, 2],
