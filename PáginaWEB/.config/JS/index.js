@@ -13,22 +13,34 @@ var dicionario = {1 : [0, 0],
   8 : [2, 1],
   9 : [2, 2]}
 
-for(var i=0;i<3;i++)
+  for(var i=0;i<3;i++)
     tabuleiro[i] = new Array('','','');
 
 function atualizarTabuleiro(){
     if(ganhador!='False')
         return;
 
-    $('#1').html(tabuleiro[0][0]);
-    $('#2').html(tabuleiro[0][1]);
-    $('#3').html(tabuleiro[0][2]);
-    $('#4').html(tabuleiro[1][0]);
-    $('#5').html(tabuleiro[1][1]);
-    $('#6').html(tabuleiro[1][2]);
-    $('#7').html(tabuleiro[2][0]);
-    $('#8').html(tabuleiro[2][1]);
-    $('#9').html(tabuleiro[2][2]);
+    var x=1;
+
+    for(var i=0;i<3;i++){
+        for(var j=0;j<3;j++){
+            if(tabuleiro[i][j]=="X"){
+                $('#' + x).attr("src","Imgs/Henrique.png");
+            }
+            else{
+                if(tabuleiro[i][j]=="O"){
+                    $('#' + x).attr("src","Imgs/Moacy.png");
+                }
+                else{
+                    $('#' + x).attr("src","Imgs/Transparente.png");
+                }
+            }
+
+            x++;
+        }
+    }
+
+
 
     $(".1").removeClass("z-depth-3");
     $(".2").removeClass("z-depth-3");
@@ -79,7 +91,10 @@ function mouseEmCima(x){
 
     $('.' + x).addClass("z-depth-3");
 
-    $('#' + x).html(pecas[vez%2]);
+    if(pecas[vez%2]=="X")
+        $('#' + x).attr("src","Imgs/Henrique.png");
+    else
+        $('#' + x).attr("src","Imgs/Moacy.png");
 }
 
 function limpaTudo(){
