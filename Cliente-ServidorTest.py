@@ -2,6 +2,9 @@ from flask_socketio import send, SocketIO, emit
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
 from random import randint
+import socket
+import fcntl
+import struct
 import requests
 import Nucleo
 
@@ -14,17 +17,34 @@ tabuleiro = [['','',''],
              ['','','']]
 
 ipAdversario = False
-minhaJogada = 0
+minhaJogada = ''
 jogadaAdversario = 0
 myPort = 5005
+minhaVez = "false"
+
+def get_ip_address():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    return socket.inet_ntoa(fcntl.ioctl(
+        s.fileno(),
+        0x8915,  # SIOCGIFADDR
+        struct.pack('256s', 'eth0'[:15])
+    )[20:24])
 
 @app.route("/temVencedor", methods = ['POST'])
 def temVencedor():
     tabuleiro = request.json
     return str(Nucleo.verificarVencedor(tabuleiro, ''))
 
-@app.route("/setIPByServer/<port>")
-def setIPByServer(port):
+@app.route("/pegarPeca")
+def pegarPeca():
+    return minhaJogada
+
+@app.route("/pegarTabuleiro")
+def pegarTabuleiro():
+    return str(tabuleiro).replace("'","\"")
+
+@app.route("/setIPByServer/<ip>")
+def setIPByServer(ip):
     global ipAdversario, minhaJogada, jogadaAdversario
 
     if not ipAdversario:
@@ -36,7 +56,10 @@ def setIPByServer(port):
             minhaJogada = "X"
 
         socketio.emit("defineJogada", minhaJogada)
-        ipAdversario = request.remote_addr + ":" + str(port)
+
+        ipAdversario = str(ip)
+
+        print(ipAdversario)
 
         return minhaJogada
 
@@ -55,23 +78,35 @@ def setIPByWEB(ip):
     if not ipAdversario:
         ipAdversario = ip
 
-        r = requests.get("http://" + ip + "/setIPByServer/" + str(myPort), params={"jogada": minhaJogada})
+        r = requests.get("http://" + ip + "/setIPByServer/" + get_ip_address() + ":" + str(myPort), params={"jogada": minhaJogada})
 
-        return minhaJogada
-
-    return "N"
+    return minhaJogada
 
 @app.route("/jogar")
 def recebeJogada():
     x = request.args.get('x')
     y = request.args.get('y')
 
-    if ipAdversario.split(":")[0]!=request.remote_addr:
-        return "N"
+    minhaVez = "true"
+    tabuleiro[int(x)][int(y)] = str(jogadaAdversario)
+    socketio.emit("NovaJogada", str(tabuleiro).replace("'","\""))
 
-    tabuleiro[int(x)][int(y)] = jogadaAdversario
-    socketio.emit("NovaJogada", str(tabuleiro))
+    return str(tabuleiro).replace("'","\"")
 
-    return str(tabuleiro)
+@app.route("/jogarNoAdversario")
+def recebeJogadaWEB():
+    x = request.args.get('x')
+    y = request.args.get('y')
 
-socketio.run(app, debug=True, port=myPort)
+    minhaVez = "false"
+    tabuleiro[int(x)][int(y)] = str(minhaJogada)
+
+    r = requests.get("http://" + ipAdversario + "/jogar", params={"x": x, "y": y})
+
+    return "S"
+
+@app.route("/pegarMinhaVez")
+def pegarMinhaVez():
+    return minhaVez
+
+socketio.run(app, debug=True, port=myPort, host='0.0.0.0')
