@@ -20,7 +20,34 @@ ipAdversario = False
 minhaJogada = ''
 jogadaAdversario = 0
 myPort = 5000
-minhaVez = "true"
+minhaVez = ""
+
+def limpaTudo():
+    global tabuleiro, ipAdversario, minhaJogada, jogadaAdversario, minhaVez
+    tabuleiro = [['','',''],
+                 ['','',''],
+                 ['','','']]
+
+    ipAdversario = False
+    minhaJogada = ''
+    jogadaAdversario = 0
+    minhaVez = ""
+
+def setJogada():
+    global minhaVez, jogadaAdversario, minhaJogada
+
+    minhaJogada = randint(1, 2)
+
+    if minhaJogada==1:
+        minhaJogada = "X"
+        jogadaAdversario = "O"
+        minhaVez = "true"
+    else:
+        minhaJogada = "0"
+        jogadaAdversario = "X"
+        minhaVez = "false"
+
+    requests.get("http://" + ipAdversario + "/setJogada/" + str(minhaJogada))
 
 def get_ip_address():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -43,47 +70,57 @@ def pegarPeca():
 def pegarTabuleiro():
     return str(tabuleiro).replace("'","\"")
 
+@app.route("/setJogada/<jogada>")
+def setJogadaW(jogada):
+    global minhaVez, jogadaAdversario, minhaJogada
+
+    jogadaAdversario = str(jogada)
+
+    if jogadaAdversario=="X":
+        minhaJogada = "O"
+        minhaVez = "false"
+    else:
+        minhaJogada = "X"
+        minhaVez = "true"
+
+    socketio.emit("defineJogada", minhaJogada)
+    socketio.emit("defineVez", minhaVez)
+
+    return ""
+
 @app.route("/setIPByServer/<ip>")
 def setIPByServer(ip):
-    global ipAdversario, minhaJogada, jogadaAdversario
+    global ipAdversario, minhaJogada, jogadaAdversario, minhaVez
 
-    if not ipAdversario:
-        jogadaAdversario = request.args.get("jogada")
+    limpaTudo()
 
-        if jogadaAdversario=="X":
-            minhaJogada = "O"
-        else:
-            minhaJogada = "X"
+    ipAdversario = str(ip)
 
-        socketio.emit("defineJogada", minhaJogada)
+    print(ipAdversario)
 
-        ipAdversario = str(ip)
-
-        print(ipAdversario)
-
-        return minhaJogada
-
-    return "N"
+    return minhaJogada
 
 @app.route("/setIPByWEB/<ip>")
 def setIPByWEB(ip):
-    global ipAdversario, minhaJogada, jogadaAdversario
+    global ipAdversario, minhaJogada, jogadaAdversario, minhaVez
 
-    minhaJogada = randint(1, 2)
-    if minhaJogada==1:
-        minhaJogada = "X"
-    else:
-        minhaJogada = "O"
+    limpaTudo()
 
-    if not ipAdversario:
-        ipAdversario = ip
+    ipAdversario = ip
 
-        r = requests.get("http://" + ip + "/setIPByServer/" + get_ip_address() + ":" + str(myPort), params={"jogada": minhaJogada})
+    r = requests.get("http://" + ip + "/setIPByServer/" + get_ip_address() + ":" + str(myPort))
+
+    setJogada()
+
+    socketio.emit("defineJogada", minhaJogada)
+    socketio.emit("defineVez", minhaVez)
 
     return minhaJogada
 
 @app.route("/jogar")
 def recebeJogada():
+    global minhaVez, tabuleiro
+
     x = request.args.get('x')
     y = request.args.get('y')
 
@@ -95,6 +132,8 @@ def recebeJogada():
 
 @app.route("/jogarNoAdversario")
 def recebeJogadaWEB():
+    global minhaVez, tabuleiro
+
     x = request.args.get('x')
     y = request.args.get('y')
 
@@ -108,5 +147,34 @@ def recebeJogadaWEB():
 @app.route("/pegarMinhaVez")
 def pegarMinhaVez():
     return minhaVez
+
+@app.route("/passarPartidaServidor")
+def passarPartidaServidor():
+    global tabuleiro
+
+    tabuleiro = [['','',''],
+                ['','',''],
+                ['','','']]
+
+    socketio.emit("passarPartida", "ok")
+    socketio.emit("defineJogada", minhaJogada)
+    socketio.emit("defineVez", minhaVez)
+
+    return ""
+
+@app.route("/passarPartida")
+def passarPartida():
+    global tabuleiro
+
+    tabuleiro = [['','',''],
+                ['','',''],
+                ['','','']]
+
+    r = requests.get("http://" + ipAdversario + "/passarPartidaServidor")
+
+    socketio.emit("passarPartida", "ok")
+    setJogada()
+    
+    return ""
 
 socketio.run(app, debug=True, port=myPort, host='0.0.0.0')
