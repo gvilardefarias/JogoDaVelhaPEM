@@ -32,3 +32,50 @@ h1{
     margin-top: -50px;
     right: 0px;
 }
+
+.div1{
+  position: fixed;
+
+  padding-left: 50%;
+  padding-bottom: 25%;
+
+  right: 0px;
+  top: 0px;
+
+  z-index: -1;
+
+  background-color: none;
+}
+
+.div2{
+  position: fixed;
+
+  padding-left: 50%;
+  padding-bottom: 25%;
+
+  right: 0px;
+  top: 50%;
+
+  z-index: -1;
+
+  background-color: none;
+}
+
+body{
+  position: relative;
+  z-index: -1;
+}
+
+.div3{
+  position: fixed;
+
+  padding-left: 50%;
+  padding-bottom: 25%;
+
+  right: 50%;
+  top: 50%;
+
+  z-index: -1;
+
+  background-color: none;
+}

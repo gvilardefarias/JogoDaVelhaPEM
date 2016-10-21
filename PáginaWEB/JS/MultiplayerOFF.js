@@ -2,7 +2,7 @@ $(document).ready(function(){
     $('.modal-trigger').leanModal();
 });
 
-var pecas = ['X', 'O'], vez = 0, placar = [0, 0], tabuleiro = new Array(3), ganhador='False';
+var pecas = ['X', 'O'], vez = 0, placar = [0, 0], tabuleiro = new Array(3), ganhador='False', Bb1 = false, Bb2 = false, Bb3 = false;
 var dicionario = {1 : [0, 0],
   2 : [0, 1],
   3 : [0, 2],
@@ -15,6 +15,45 @@ var dicionario = {1 : [0, 0],
 
 for(var i=0;i<3;i++)
     tabuleiro[i] = new Array('','','');
+
+function b1(){
+  console.log("ok");
+  if(Bb2 && Bb3){
+    window.location.href = ".config/index.html";
+    console.log("ok");
+  }
+  else{
+    Bb1 = false;
+  }
+}
+
+function b2(){
+  if(Bb3){
+
+    Bb2 = true;
+    console.log("b2");
+  }
+  else{
+    Bb2 = false;
+  }
+}
+
+function b3(){
+  console.log("b3");
+  Bb3 = !Bb3;
+}
+
+$('div.div1').click(function bu1(){
+  b1();
+});
+
+$('div.div2').click(function bu2(){
+  b2();
+});
+
+$('div.div3').click(function bu3(){
+  b3();
+});
 
 function atualizarTabuleiro(){
     if(ganhador!='False')
