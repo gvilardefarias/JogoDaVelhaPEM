@@ -3,8 +3,7 @@ $(document).ready(function(){
   $("#escolherIP").openModal();
 });
 
-
-var pecas = ['X', 'O'], minhaPeca, minhaVez = false, placar = [0, 0], tabuleiro = new Array(3), ganhador='False', myPort = 5005, passar=false;
+var pecas = ['X', 'O'], minhaPeca, minhaVez = false, placar = [0, 0], tabuleiro = new Array(3), ganhador='False', passar=false;
 var dicionario = {1 : [0, 0], 2 : [0, 1], 3 : [0, 2], 4 : [1, 0], 5 : [1, 1], 6 : [1, 2], 7 : [2, 0], 8 : [2, 1], 9 : [2, 2]};
 
 for(var i=0;i<3;i++)
@@ -66,6 +65,8 @@ function temVencedor(){
       if(result!='False'){
         passar = true;
 
+        $('.again').removeClass("disabled");
+
         ganhador = result;
 
         if(ganhador=='X')
@@ -89,6 +90,8 @@ function passarPartida(){
   });
 
   passar = false;
+
+  $('.again').addClass("disabled");
 }
 
 
@@ -158,6 +161,7 @@ socket.on('defineVez', function(result) {
 });
 
 socket.on('passarPartida', function(result) {
+  $('.again').addClass("disabled");
   minhaVez = false;
   tabuleiro = new Array(3);
   ganhador='False';

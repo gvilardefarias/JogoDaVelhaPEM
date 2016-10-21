@@ -53,7 +53,7 @@ function addPeca(x, y){
 
     $.ajax({
         type : "POST",
-        url : "http://localhost:5000/temVencedor",
+        url : "http://localhost:" + myPort + "/temVencedor",
         data: JSON.stringify(tabuleiro, null, '\t'),
         contentType: 'application/json;charset=UTF-8',
         success: function(result) {

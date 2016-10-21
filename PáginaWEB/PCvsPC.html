@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <link rel="stylesheet" href="Css/PCvsPC.css">
-    <script type="text/javascript" src="JS/PCvsPC.js"></script>
+  <link rel="stylesheet" href="Css/PCvsPC.css">
+  <script type="text/javascript" src="JS/porta.js"></script>
+  <script type="text/javascript" src="JS/PCvsPC.js"></script>
 
-    <title>PEM - Multiplayer</title>
+  <title>PEM - Multiplayer</title>
 </head>
 <body class="teal deep-purple darken-4">
   <div class="container z-depth-2">
@@ -32,9 +33,11 @@
   </div>
   <p></p>
   <center>
+    <a class="btn-floating white hom z-depth-2" href="index.html"><i class="material-icons black-text">home</i></a>
+    
     <a class="waves-effect waves-light btn white modal-trigger z-depth-2 verPlacar" href="#Placar"><span class="black-text">Ver Placar</span></a>
 
-    <a class="btn-floating white again" onclick="passarPartida();"><i class="material-icons black-text">arrow_forward</i></a>
+    <a class="btn-floating white again disabled" onclick="passarPartida();"><i class="material-icons black-text">arrow_forward</i></a>
   </center>
 
   <div id="Placar" class="modal bottom-sheet">

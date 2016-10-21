@@ -7,6 +7,7 @@ import fcntl
 import struct
 import requests
 import Nucleo
+import IA
 
 app = Flask(__name__)
 CORS(app)
@@ -43,7 +44,7 @@ def setJogada():
         jogadaAdversario = "O"
         minhaVez = "true"
     else:
-        minhaJogada = "0"
+        minhaJogada = "O"
         jogadaAdversario = "X"
         minhaVez = "false"
 
@@ -176,5 +177,13 @@ def passarPartida():
     setJogada()
     
     return ""
+
+@app.route("/pegarJogadaDaIA", methods = ['POST'])
+def pegarJogadaDaIA():
+    tabuleiro = request.json
+
+    x, y = IA.pegarJogadaDaIa(tabuleiro, '', 'O', 'X')
+
+    return str([x, y])
 
 socketio.run(app, debug=True, port=myPort, host='0.0.0.0')
