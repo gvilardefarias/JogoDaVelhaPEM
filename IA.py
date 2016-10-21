@@ -42,7 +42,7 @@ def pegarJogadaDaIa(tabuleiroAtual, espacoEmBranco, pecaDaIA, pecaDoJogador):
 
                 tabuleiro[i][j] = pecaDaIA
                 jogada = julgarJogada(tabuleiro, pecaDaIA, pecaDoJogador, espacoEmBranco)
-                
+
                 jogadas[jogada].append((i, j))
 
     if len(jogadas[0]):
