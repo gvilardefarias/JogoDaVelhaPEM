@@ -73,7 +73,7 @@ function temVencedor(){
           placar[0]++;
         else
           placar[1]++;
-        
+
         $(".placar1").text(placar[0]);
         $(".placar2").text(placar[1]);
         $('#Placar').openModal();
@@ -158,6 +158,11 @@ socket.on('defineVez', function(result) {
   console.log(result);
 
   minhaVez = JSON.parse(result);
+});
+
+socket.on('habilitarPassar', function(result) {
+  passar = true;
+  atualizarTabuleiro();
 });
 
 socket.on('passarPartida', function(result) {

@@ -3,8 +3,6 @@ from flask import Flask, request
 from flask_cors import CORS, cross_origin
 from random import randint
 import socket
-import fcntl
-import struct
 import requests
 import Nucleo
 import IA
@@ -50,18 +48,15 @@ def setJogada():
 
     requests.get("http://" + ipAdversario + "/setJogada/" + str(minhaJogada))
 
-def get_ip_address():
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    return socket.inet_ntoa(fcntl.ioctl(
-        s.fileno(),
-        0x8915,  # SIOCGIFADDR
-        struct.pack('256s', 'eth0'[:15])
-    )[20:24])
+    socketio.emit("defineJogada", minhaJogada)
+    socketio.emit("defineVez", minhaVez)
 
-@app.route("/temVencedor", methods = ['POST'])
-def temVencedor():
-    tabuleiro = request.json
-    return str(Nucleo.verificarVencedor(tabuleiro, ''))
+def get_ip_address():
+    return [l for l in ([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] if not ip.startswith("127.")][:1], [[(s.connect(('8.8.8.8', 53)), s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, socket.SOCK_DGRAM)]][0][1]]) if l][0][0]
+
+@app.route("/test")
+def test():
+    return "ok"
 
 @app.route("/pegarPeca")
 def pegarPeca():
@@ -83,6 +78,35 @@ def setJogadaW(jogada):
     else:
         minhaJogada = "X"
         minhaVez = "true"
+
+    return ""
+
+@app.route("/passarPartidaServidor")
+def passarPartidaServidor():
+    global tabuleiro
+
+    tabuleiro = [['','',''],
+                ['','',''],
+                ['','','']]
+
+    socketio.emit("passarPartida", "ok")
+    socketio.emit("defineJogada", minhaJogada)
+    socketio.emit("defineVez", minhaVez)
+
+    return ""
+
+@app.route("/passarPartida")
+def passarPartida():
+    global tabuleiro
+
+    tabuleiro = [['','',''],
+                ['','',''],
+                ['','','']]
+
+    r = requests.get("http://" + ipAdversario + "/passarPartidaServidor")
+
+    socketio.emit("passarPartida", "ok")
+    setJogada()
 
     socketio.emit("defineJogada", minhaJogada)
     socketio.emit("defineVez", minhaVez)
@@ -145,38 +169,28 @@ def recebeJogadaWEB():
 
     return "S"
 
+@app.route("/temVencedor", methods = ['POST'])
+def temVencedor():
+    tabuleiro = request.json
+
+    aux = True
+
+    for i in tabuleiro:
+        for j in i:
+            if j=='':
+                aux = False
+                break
+        if not aux:
+            break
+
+    if aux:
+        socketio.emit("habilitarPassar","")
+
+    return str(Nucleo.verificarVencedor(tabuleiro, ''))
+
 @app.route("/pegarMinhaVez")
 def pegarMinhaVez():
     return minhaVez
-
-@app.route("/passarPartidaServidor")
-def passarPartidaServidor():
-    global tabuleiro
-
-    tabuleiro = [['','',''],
-                ['','',''],
-                ['','','']]
-
-    socketio.emit("passarPartida", "ok")
-    socketio.emit("defineJogada", minhaJogada)
-    socketio.emit("defineVez", minhaVez)
-
-    return ""
-
-@app.route("/passarPartida")
-def passarPartida():
-    global tabuleiro
-
-    tabuleiro = [['','',''],
-                ['','',''],
-                ['','','']]
-
-    r = requests.get("http://" + ipAdversario + "/passarPartidaServidor")
-
-    socketio.emit("passarPartida", "ok")
-    setJogada()
-    
-    return ""
 
 @app.route("/pegarJogadaDaIA", methods = ['POST'])
 def pegarJogadaDaIA():

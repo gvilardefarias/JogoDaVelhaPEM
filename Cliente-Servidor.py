@@ -48,6 +48,9 @@ def setJogada():
 
     requests.get("http://" + ipAdversario + "/setJogada/" + str(minhaJogada))
 
+    socketio.emit("defineJogada", minhaJogada)
+    socketio.emit("defineVez", minhaVez)
+
 def get_ip_address():
     return [l for l in ([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] if not ip.startswith("127.")][:1], [[(s.connect(('8.8.8.8', 53)), s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, socket.SOCK_DGRAM)]][0][1]]) if l][0][0]
 
@@ -76,6 +79,17 @@ def setJogadaW(jogada):
         minhaJogada = "X"
         minhaVez = "true"
 
+    return ""
+
+@app.route("/passarPartidaServidor")
+def passarPartidaServidor():
+    global tabuleiro
+
+    tabuleiro = [['','',''],
+                ['','',''],
+                ['','','']]
+
+    socketio.emit("passarPartida", "ok")
     socketio.emit("defineJogada", minhaJogada)
     socketio.emit("defineVez", minhaVez)
 
@@ -93,6 +107,9 @@ def passarPartida():
 
     socketio.emit("passarPartida", "ok")
     setJogada()
+
+    socketio.emit("defineJogada", minhaJogada)
+    socketio.emit("defineVez", minhaVez)
 
     return ""
 
@@ -155,6 +172,7 @@ def recebeJogadaWEB():
 @app.route("/temVencedor", methods = ['POST'])
 def temVencedor():
     tabuleiro = request.json
+
     aux = True
 
     for i in tabuleiro:
@@ -166,27 +184,13 @@ def temVencedor():
             break
 
     if aux:
-        passarPartida()
+        socketio.emit("habilitarPassar","")
 
     return str(Nucleo.verificarVencedor(tabuleiro, ''))
 
 @app.route("/pegarMinhaVez")
 def pegarMinhaVez():
     return minhaVez
-
-@app.route("/passarPartidaServidor")
-def passarPartidaServidor():
-    global tabuleiro
-
-    tabuleiro = [['','',''],
-                ['','',''],
-                ['','','']]
-
-    socketio.emit("passarPartida", "ok")
-    socketio.emit("defineJogada", minhaJogada)
-    socketio.emit("defineVez", minhaVez)
-
-    return ""
 
 @app.route("/pegarJogadaDaIA", methods = ['POST'])
 def pegarJogadaDaIA():

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link rel="stylesheet" href="Css/MultiplayerOFF.css">
+  <script type="text/javascript" src="JS/porta.js"></script>
+  <script type="text/javascript" src="JS/MultiplayerOFF.js"></script>
+
+  <title>PEM - Multiplayer Offline</title>
+</head>
+<body class="teal deep-purple darken-4">
+
+  <div class="container z-depth-2">
+    <div class="row">
+      <div class="col s4 1" onclick="addPeca(0,0)" onmouseover="mouseEmCima('1');" onmouseout="atualizarTabuleiro();"><h1 id="1"></h1></div>
+      <div class="col s4 2" onclick="addPeca(0,1)" onmouseover="mouseEmCima('2');" onmouseout="atualizarTabuleiro();"><h1 id="2"></h1></div>
+      <div class="col s4 3" onclick="addPeca(0,2)" onmouseover="mouseEmCima('3');" onmouseout="atualizarTabuleiro();"><h1 id="3"></h1></div>
+    </div>
+    <div class="row">
+      <div class="col s4 4" onclick="addPeca(1,0)" onmouseover="mouseEmCima('4');" onmouseout="atualizarTabuleiro();"><h1 id="4"></h1></div>
+      <div class="col s4 5" onclick="addPeca(1,1)" onmouseover="mouseEmCima('5');" onmouseout="atualizarTabuleiro();"><h1 id="5"></h1></div>
+      <div class="col s4 6" onclick="addPeca(1,2)" onmouseover="mouseEmCima('6');" onmouseout="atualizarTabuleiro();"><h1 id="6"></h1></div>
+    </div>
+    <div class="row">
+      <div class="col s4 7" onclick="addPeca(2,0)" onmouseover="mouseEmCima('7');" onmouseout="atualizarTabuleiro();"><h1 id="7"></h1></div>
+      <div class="col s4 8" onclick="addPeca(2,1)" onmouseover="mouseEmCima('8');" onmouseout="atualizarTabuleiro();"><h1 id="8"></h1></div>
+      <div class="col s4 9" onclick="addPeca(2,2)" onmouseover="mouseEmCima('9');" onmouseout="atualizarTabuleiro();"><h1 id="9"></h1></div>
+    </div>
+  </div>
+  <p></p>
+  <center>
+    <a class="btn-floating white hom z-depth-2" href="index.html"><i class="material-icons black-text">home</i></a>
+
+    <a class="waves-effect waves-light btn white modal-trigger z-depth-2 verPlacar" href="#Placar"><span class="black-text">Ver Placar</span></a>
+
+    <a class="btn-floating white again z-depth-2" onclick="limpaTudo();"><i class="material-icons black-text">replay</i></a>
+  </center>
+
+  <div id="Placar" class="modal bottom-sheet">
+    <div class="modal-content">
+      <center><h4 id="Ganhador">Placar</h4></center>
+      <h5 class="placar1">0</h5>
+      <h5 class="placar2">0</h5>
+    </div>
+  </div>
+</body>
+</html>
