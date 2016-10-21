@@ -1,19 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
 
-  <link rel="stylesheet" href="Css/index.css">
-  <script type="text/javascript" src="JS/index.js"></script>
+    <link rel="stylesheet" href="Css/index.css">
+    <script type="text/javascript" src="JS/index.js"></script>
 
-  <title>PEM - Jogo da Velha</title>
+    <title>PEM - Jogo da Velha</title>
 </head>
 <body class="teal deep-purple darken-4">
-  <center><img src="Imgs/Logo.png" height="200" width="200"></center>
+  <center><img src="Imgs/Logo.png" height="300" width="300"></center>
 
-  <center><a class="waves-effect waves-light btn white primeiro"><span class="black-text">Singleplayer</span></a></center>
-  <center><a class="waves-effect waves-light btn white"><span class="black-text">Multiplayer</span></a></center>        
+  <center><a class='dropdown-button btn white' href='#' data-activates='dropdown1'><span class="black-text">Singleplayer</span></a></center>
+
+  <ul id='dropdown1' class='dropdown-content'>
+      <li><a href="PCvsIA.html"><span class="black-text">Facil</span></a></li>
+      <li><a href="#!"><span class="black-text">Dificil</span></a></li>
+  </ul>
+
+  <center><a class='dropdown-button btn white' href='#' data-activates='multiplayer'><span class="black-text">Multiplayer</span></a></center>
+
+  <ul id='multiplayer' class='dropdown-content'>
+      <li><a href="PCvsPC.html"><span class="black-text">Online</span></a></li>
+      <li><a href="MultiplayerOFF.html"><span class="black-text">Offline</span></a></li>
+  </ul>
+     
   <hr align="center" width="70" size="1" color=red>
 </body>
 </html>

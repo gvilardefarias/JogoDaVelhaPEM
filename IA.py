@@ -51,28 +51,3 @@ def pegarJogadaDaIa(tabuleiroAtual, espacoEmBranco, pecaDaIA, pecaDoJogador):
         return jogadas[1][randint(0, len(jogadas[1])-1)]
     if len(jogadas[2]):
         return jogadas[2][randint(0, len(jogadas[2])-1)]
-
-#Testes
-
-tabuleiro = [[0,0,0],[0,0,0],[0,0,0]]
-
-while True:
-    aux = input().split()
-    x = int(aux[0])
-    y = int(aux[1])
-
-    tabuleiro[x][y] = 1
-
-    for i in tabuleiro:
-        print(i)
-
-    print("\n\n")
-
-    x, y = pegarJogadaDaIa(tabuleiro, 0, 2, 1)
-
-    tabuleiro[x][y] = 2
-
-    for i in tabuleiro:
-        print(i)
-
-    print("\n\n")
