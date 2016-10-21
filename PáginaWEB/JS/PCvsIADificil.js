@@ -20,15 +20,25 @@ function atualizarTabuleiro(){
     if(ganhador!='False')
         return;
 
-    $('#1').html(tabuleiro[0][0]);
-    $('#2').html(tabuleiro[0][1]);
-    $('#3').html(tabuleiro[0][2]);
-    $('#4').html(tabuleiro[1][0]);
-    $('#5').html(tabuleiro[1][1]);
-    $('#6').html(tabuleiro[1][2]);
-    $('#7').html(tabuleiro[2][0]);
-    $('#8').html(tabuleiro[2][1]);
-    $('#9').html(tabuleiro[2][2]);
+    var x=1;
+
+    for(var i=0;i<3;i++){
+        for(var j=0;j<3;j++){
+            if(tabuleiro[i][j]=="O"){
+                $('#' + x).attr("src",".config/Imgs/Henrique.png");
+            }
+            else{
+                if(tabuleiro[i][j]=="X"){
+                    $('#' + x).attr("src",".config/Imgs/O.png");
+                }
+                else{
+                    $('#' + x).attr("src",".config/Imgs/Transparente.png");
+                }
+            }
+
+            x++;
+        }
+    }
 
     $(".1").removeClass("z-depth-3");
     $(".2").removeClass("z-depth-3");
@@ -76,6 +86,8 @@ function addPeca(x, y){
         data: JSON.stringify(tabuleiro, null, '\t'),
         contentType: 'application/json;charset=UTF-8',
         success: function(result) {
+            console.log(result);
+
             result = JSON.parse(result);
 
             tabuleiro[result[0]][result[1]] = "O";
@@ -101,6 +113,7 @@ function addPeca(x, y){
         }
     });
 
+    console.log(tabuleiro);
     vez++;
 }
 
@@ -112,8 +125,7 @@ function mouseEmCima(x){
         return;
 
     $('.' + x).addClass("z-depth-3");
-
-    $('#' + x).html(pecas);
+    $('#' + x).attr("src",".config/Imgs/O.png");
 }
 
 function limpaTudo(){
