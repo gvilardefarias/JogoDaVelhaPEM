@@ -1,3 +1,16 @@
+def copiarMatriz(matrizOriginal):
+    copia = []
+
+    for i in matrizOriginal:
+        copiaLinha = []
+
+        for j in i:
+            copiaLinha.append(j)
+
+        copia.append(copiaLinha)
+
+    return copia
+
 def verificarVencedor(tabuleiro, espacoEmBranco):
     todosIguaisNaDiagonal1 = True
     todosIguaisNaDiagonal2 = True
@@ -27,41 +40,3 @@ def verificarVencedor(tabuleiro, espacoEmBranco):
             return tabuleiro[i][i]
 
     return False
-
-#Testes:
-
-tabuleiro =  [["X","","O"],
-              ["O","O","X"],
-              ["O","X","X"]]
-
-print(verificarVencedor(tabuleiro, ""))
-
-tabuleiro =  [[1,2,0],
-              [0,2,0],
-              [0,2,1]]
-
-print(verificarVencedor(tabuleiro, 2))
-
-tabuleiro =  [[1,2,0],
-              [0,2,0],
-              [0,2,1]]
-
-print(verificarVencedor(tabuleiro, 0))
-
-tabuleiro =  [["X","O","X"],
-              ["O","O","X"],
-              ["O","X","X"]]
-
-print(verificarVencedor(tabuleiro, ""))
-
-tabuleiro =  [["X","X","X"],
-              ["O","O","X"],
-              ["O","X","X"]]
-
-print(verificarVencedor(tabuleiro, ""))
-
-tabuleiro =  [["X","","X"],
-              ["O","O","O"],
-              ["O","X","X"]]
-
-print(verificarVencedor(tabuleiro, ""))
