@@ -1,0 +1,81 @@
+.container{
+    width: 450px;
+    height: 470px;
+    padding-left: 20px;
+    padding-right: 20px;
+    vertical-align: center;
+}
+
+.again{
+    margin-left: 10px;
+}
+
+.hom{
+    margin-right: 10px;
+}
+
+.s4{
+    height: 140px;
+    text-align: center;
+}
+
+h1{
+    color: white;
+}
+
+.verPlacar{
+    margin-top: 5px;
+}
+
+.placar2{
+    position: absolute;
+    margin-top: -50px;
+    right: 0px;
+}
+
+.div1{
+  position: fixed;
+
+  padding-left: 50%;
+  padding-bottom: 25%;
+
+  right: 0px;
+  top: 0px;
+
+  z-index: -1;
+
+  background-color: none;
+}
+
+.div2{
+  position: fixed;
+
+  padding-left: 50%;
+  padding-bottom: 25%;
+
+  right: 0px;
+  top: 50%;
+
+  z-index: -1;
+
+  background-color: none;
+}
+
+body{
+  position: relative;
+  z-index: -1;
+}
+
+.div3{
+  position: fixed;
+
+  padding-left: 50%;
+  padding-bottom: 25%;
+
+  right: 50%;
+  top: 50%;
+
+  z-index: -1;
+
+  background-color: none;
+}

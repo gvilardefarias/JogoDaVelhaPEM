@@ -1,0 +1,35 @@
+.container{
+    width: 450px;
+    height: 470px;
+    padding-left: 20px;
+    padding-right: 20px;
+    vertical-align: center;
+}
+
+.again{
+    margin-left: 10px;
+}
+
+.hom{
+    position: relative;
+    margin-right: 10px;
+}
+
+.s4{
+    height: 140px;
+    text-align: center;
+}
+
+h1{
+    color: white;
+}
+
+.verPlacar{
+    margin-top: 5px;
+}
+
+.placar2{
+    position: absolute;
+    margin-top: -50px;
+    right: 0px;
+}
