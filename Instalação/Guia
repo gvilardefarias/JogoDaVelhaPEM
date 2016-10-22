@@ -1,10 +1,14 @@
-su
-Microeletronic@IFPBPEM
+CentOS - Fedora
+    su
 
-rpm -iUvh 2048-cli-0.9.1-1.el6.x86_64.rpm
-yum -y install python-pip
+    rpm -iUvh 2048-cli-0.9.1-1.el6.x86_64.rpm
+    yum -y install python-pip
 
-pip install flask
-pip install flask_socketio
-pip install flask_cors
-pip install requests
+Ubuntu - Debian
+    sudo apt-get install pip
+
+Depois, para ambos:
+    pip install flask
+    pip install flask_socketio
+    pip install flask_cors
+    pip install requests
